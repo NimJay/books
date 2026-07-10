@@ -84,10 +84,12 @@ resource "google_project_iam_member" "build_service_account_storage_object_user"
   member  = "serviceAccount:${google_service_account.build_service_account.email}"
 }
 
-# The Cloud Build service account needs to be able to deploy to Cloud Run.
-resource "google_project_iam_member" "build_service_account_run_developer" {
+# The Cloud Build service account needs to be able to deploy to Cloud Run
+# and configure the Cloud Run service's invoker_iam_disabled annotation
+# (which requires roles/run.admin).
+resource "google_project_iam_member" "build_service_account_run_admin" {
   project = var.google_cloud_project_id
-  role    = "roles/run.developer"
+  role    = "roles/run.admin"
   member  = "serviceAccount:${google_service_account.build_service_account.email}"
 }
 
