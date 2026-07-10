@@ -171,13 +171,13 @@ resource "google_service_account" "books_cloud_run_service_service_account" {
 }
 
 # Map books.reexpose.org to the Books Cloud Run service.
-# resource "google_cloud_run_domain_mapping" "default" {
-#   location = "us-central1"
-#   name     = "books.reexpose.org"
-#   metadata {
-#     namespace = var.google_cloud_project_id
-#   }
-#   spec {
-#     route_name = google_cloud_run_service.books_cloud_run_service.name
-#   }
-# }
+resource "google_cloud_run_domain_mapping" "default" {
+  location = "us-central1"
+  name     = "books.reexpose.org"
+  metadata {
+    namespace = var.google_cloud_project_id
+  }
+  spec {
+    route_name = google_cloud_run_service.books_cloud_run_service.name
+  }
+}
