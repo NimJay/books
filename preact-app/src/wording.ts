@@ -5,6 +5,7 @@
 import { WORDING_MAP } from "./wording-en";
 
 interface WordingMap {
+  AboutPageUnderConstruction: string;
   HomePageUnderConstruction: string;
 }
 

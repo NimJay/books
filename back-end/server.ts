@@ -12,6 +12,9 @@ const app = express();
 
 app.use(express.json());
 
+// Handle front-end (preact-app) pages
+app.get('/about', sendIndexHtmlHandler);
+
 // Host the static files inside ../preact-app/dist
 // We go two folders up because the compiled (JS) code is in a subfolder
 const frontEndFolderPath = path.join(__dirname, '../../preact-app/dist');
