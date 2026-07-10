@@ -134,35 +134,35 @@ resource "google_artifact_registry_repository" "docker_container_registry_reposi
 }
 
 # Cloud Run service that runs the Books container image
-resource "google_cloud_run_service" "books_cloud_run_service" {
-  project  = var.google_cloud_project_id
-  name     = "books"
-  location = "us-central1"
-  template {
-    spec {
-      service_account_name = google_service_account.books_cloud_run_service_service_account.email
-      containers {
-        image = "us-central1-docker.pkg.dev/${var.google_cloud_project_id}/books-docker-containers/books:${var.books_image_tag}"
-        env {
-          name  = "GOOGLE_CLOUD_PROJECT_ID"
-          value = var.google_cloud_project_id
-        }
-        ports {
-          container_port = 3000
-        }
-      }
-    }
-  }
-  metadata {
-    annotations = {
-      # Allow public access to the Cloud Run service.
-      "run.googleapis.com/invoker-iam-disabled" = "true"
-    }
-  }
-  depends_on = [
-    module.enable_google_cloud_apis,
-  ]
-}
+# resource "google_cloud_run_service" "books_cloud_run_service" {
+#   project  = var.google_cloud_project_id
+#   name     = "books"
+#   location = "us-central1"
+#   template {
+#     spec {
+#       service_account_name = google_service_account.books_cloud_run_service_service_account.email
+#       containers {
+#         image = "us-central1-docker.pkg.dev/${var.google_cloud_project_id}/books-docker-containers/books:${var.books_image_tag}"
+#         env {
+#           name  = "GOOGLE_CLOUD_PROJECT_ID"
+#           value = var.google_cloud_project_id
+#         }
+#         ports {
+#           container_port = 3000
+#         }
+#       }
+#     }
+#   }
+#   metadata {
+#     annotations = {
+#       # Allow public access to the Cloud Run service.
+#       "run.googleapis.com/invoker-iam-disabled" = "true"
+#     }
+#   }
+#   depends_on = [
+#     module.enable_google_cloud_apis,
+#   ]
+# }
 
 # Service account for the Cloud Run service running Books
 resource "google_service_account" "books_cloud_run_service_service_account" {
@@ -171,13 +171,13 @@ resource "google_service_account" "books_cloud_run_service_service_account" {
 }
 
 # Map books.reexpose.org to the Books Cloud Run service.
-resource "google_cloud_run_domain_mapping" "default" {
-  location = "us-central1"
-  name     = "books.reexpose.org"
-  metadata {
-    namespace = var.google_cloud_project_id
-  }
-  spec {
-    route_name = google_cloud_run_service.books_cloud_run_service.name
-  }
-}
+# resource "google_cloud_run_domain_mapping" "default" {
+#   location = "us-central1"
+#   name     = "books.reexpose.org"
+#   metadata {
+#     namespace = var.google_cloud_project_id
+#   }
+#   spec {
+#     route_name = google_cloud_run_service.books_cloud_run_service.name
+#   }
+# }
