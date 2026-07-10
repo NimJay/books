@@ -27,8 +27,8 @@ steps:
   - apply
   - -var
   - "google_cloud_project_id=$PROJECT_ID"
-  # - -var
-  # - "books_image_tag=$SHORT_SHA"
+  - -var
+  - "books_image_tag=$SHORT_SHA"
   - -target
   - "google_cloud_run_service.books_cloud_run_service"
   - -auto-approve
