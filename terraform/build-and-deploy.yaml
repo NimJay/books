@@ -18,7 +18,7 @@ steps:
 - name: 'hashicorp/terraform:1.14.2'
   args:
   - init
-  - -backend-config="bucket=books-terraform-state"
+  - -backend-config=bucket=books-terraform-state
   dir: terraform/
 
 # Apply the Terraform to re-deploy the Cloud Run service
