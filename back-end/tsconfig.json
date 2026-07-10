@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "ES2019",
+    "lib": [
+      "ES2019"
+    ]
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

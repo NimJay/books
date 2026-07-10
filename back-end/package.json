@@ -1,0 +1,53 @@
+{
+  "name": "back-end",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "license": "Apache-2.0",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "compile-typescript": "tsc --watch",
+    "compile-typescript-no-watch": "tsc",
+    "fix-lint": "npx eslint --fix . --ext .ts,.tsx",
+    "run-server": "nodemon --delay 1 ./build/server.js --watch ./build/ --ext js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.1",
+    "eslint": "^8.57.1",
+    "eslint-config-preact": "^1.5.0",
+    "eslint-plugin-jsdoc": "^61.1.12",
+    "nodemon": "^3.1.11",
+    "typescript": "^5.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "preact",
+      "plugin:jsdoc/recommended"
+    ],
+    "plugins": [
+      "jsdoc"
+    ],
+    "rules": {
+      "jsdoc/require-file-overview": [
+        "error"
+      ]
+    },
+    "settings": {
+      "jsdoc": {
+        "mode": "typescript",
+        "preferredTypes": {
+          "object": "Object",
+          "array": "Array",
+          "function": "Function",
+          "JSX.Element": "JSX.Element"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1"
+  }
+}
