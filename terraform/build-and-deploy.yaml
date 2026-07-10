@@ -1,0 +1,38 @@
+steps:
+
+# Build the Docker image (it contains both the back-end and the front-end/preact-app)
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - build
+  - -t
+  - us-central1-docker.pkg.dev/$PROJECT_ID/books-docker-containers/books:$SHORT_SHA
+  - .
+
+# Push the Docker image to the Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - push
+  - us-central1-docker.pkg.dev/$PROJECT_ID/books-docker-containers/books:$SHORT_SHA
+
+# Initialize the Terraform
+- name: 'hashicorp/terraform:1.14.2'
+  args:
+  - init
+  - -backend-config="bucket=books-terraform-state"
+  dir: terraform/
+
+# Apply the Terraform to re-deploy the Cloud Run service
+- name: 'hashicorp/terraform:1.14.2'
+  args:
+  - apply
+  - -var
+  - "google_cloud_project_id=$PROJECT_ID"
+  - -var
+  - "books_image_tag=$SHORT_SHA"
+  - -target
+  - "google_cloud_run_service.books_cloud_run_service"
+  - -auto-approve
+  dir: terraform/
+
+options:
+  logging: CLOUD_LOGGING_ONLY
