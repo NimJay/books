@@ -1,0 +1,17 @@
+# The .editorconfig is used to maintain consistent code style.
+# The .editorconfig file is supported by most text editors.
+# For VS Code and similar IDEs, you will need to install the EditorConfig extension.
+# See https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.html]
+indent_style = tab
